@@ -153,11 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 3.2 Modal de Pagos (PayPal & Banco Santander)
-  function openPaymentModal(serviceType = 'Sesión de Hipnosis Terapéutica') {
+  function openPaymentModal(serviceType = 'Sesión Online de Hipnosis') {
     const paymentHtml = `
       <div class="payment-modal-wrapper">
         <div class="payment-modal-header">
-          <span class="section-tag" style="margin-bottom: 0.5rem; display: inline-block;">Reserva y Confirmación</span>
+          <span class="section-tag" style="margin-bottom: 0.5rem; display: inline-block;">Reserva de Sesión Online</span>
           <h3 class="payment-modal-title">Métodos de Pago Disponibles</h3>
           <p class="payment-modal-sub">Valor de la sesión: <strong>US$50.-</strong> (o equivalente en moneda local)</p>
         </div>
@@ -166,11 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Tarjeta 1: PayPal y Tarjetas Internacionales -->
           <div class="payment-card">
             <div>
-              <span class="payment-card-badge badge-paypal">🌐 Internacional / Tarjetas</span>
-              <h4 class="payment-card-title">PayPal / Tarjeta</h4>
+              <span class="payment-card-badge badge-paypal">🌐 Tarjetas Internacionales / PayPal</span>
+              <h4 class="payment-card-title">Tarjeta de Débito, Crédito o PayPal</h4>
               <div class="payment-card-amount">US$ 50.00</div>
-              <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 1.25rem; line-height: 1.5;">
-                Paga de forma inmediata y protegida usando tu saldo PayPal o cualquier tarjeta de crédito o débito internacional.
+              <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 1.25rem; line-height: 1.55;">
+                <strong>¿No tienes cuenta de PayPal?</strong> No es necesario crearte una: en la pasarela puedes pagar directamente con tu tarjeta seleccionando la opción <em>"Pagar con tarjeta de débito o crédito"</em>.
               </p>
             </div>
             <div>
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  class="btn btn-paypal" 
                  style="width: 100%; text-align: center; justify-content: center; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; padding: 0.85rem 1rem;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .77-.655h7.625c3.705 0 6.137 1.776 5.677 5.15-.362 2.656-2.19 4.195-4.78 4.195h-2.52a.855.855 0 0 0-.845.72l-.995 6.207h-.001zm14.398-13.41c-.48 3.518-2.923 5.485-6.388 5.485h-2.22a.965.965 0 0 0-.954.814l-1.07 6.677a.641.641 0 0 1-.633.541H5.786a.428.428 0 0 1-.422-.494l.226-1.417.842-5.26.04-.216a.855.855 0 0 1 .845-.72h2.52c2.59 0 4.418-1.539 4.78-4.195.46-3.374-1.972-5.15-5.677-5.15H6.383a.78.78 0 0 0-.77.655L3.71 18.067a.428.428 0 0 0 .422.494h3.693l1.173-7.32a.965.965 0 0 1 .954-.814h2.22c3.465 0 5.908-1.967 6.388-5.485.426-3.13-1.636-4.942-5.06-4.942H6.94a.5.5 0 0 0-.494.422L6.15 2.11a.78.78 0 0 1 .77-.655h5.58c3.424 0 5.486 1.812 5.06 4.942l3.914 1.53z"/></svg>
-                Pagar US$50 con PayPal
+                Pagar US$50 con Tarjeta o PayPal
               </a>
             </div>
           </div>
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <button type="button" class="btn btn-copy" id="btnCopyBank">
                 📋 Copiar Datos Bancarios
               </button>
-              <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, he realizado la transferencia para mi sesión de hipnosis (' + serviceType + '). Adjunto mi comprobante:')}" 
+              <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, he realizado la transferencia para mi sesión de hipnosis online. Adjunto mi comprobante:')}" 
                  target="_blank" 
                  rel="noopener" 
                  class="btn btn-whatsapp" 
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <div class="payment-footer-note">
-          <p>💬 ¿Prefieres coordinar fecha y hora antes de pagar? <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, quisiera consultar disponibilidad de horarios para una ' + serviceType + '.')}" target="_blank" rel="noopener" style="color: var(--color-accent); font-weight: 600; text-decoration: underline;">Escríbeme directamente por WhatsApp</a>.</p>
+          <p>💬 ¿Prefieres coordinar fecha y hora antes de pagar? <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, quisiera consultar disponibilidad de horarios para mi sesión online.')}" target="_blank" rel="noopener" style="color: var(--color-accent); font-weight: 600; text-decoration: underline;">Escríbeme directamente por WhatsApp</a>.</p>
         </div>
       </div>
     `;
