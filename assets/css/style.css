@@ -1415,3 +1415,148 @@ textarea.form-control {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   MODAL DE PAGOS (PAYPAL & TRANSFERENCIA BANCARIA)
+   ========================================================================== */
+
+.payment-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.payment-modal-title {
+  font-size: 1.65rem;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.payment-modal-sub {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.payment-methods-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .payment-methods-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.payment-card {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+}
+
+.payment-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+}
+
+.payment-card-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.badge-paypal {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-chile {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.payment-card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  color: var(--color-primary);
+}
+
+.payment-card-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.payment-bank-details {
+  background: #f8fafc;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+  border: 1px solid #e2e8f0;
+}
+
+.payment-bank-details p {
+  margin-bottom: 0.35rem;
+}
+
+.payment-bank-details strong {
+  color: var(--color-primary);
+}
+
+.btn-paypal {
+  background: #ffc439;
+  color: #111111;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 196, 57, 0.4);
+}
+
+.btn-paypal:hover {
+  background: #f4b41a;
+  transform: translateY(-2px);
+  color: #000000;
+}
+
+.btn-copy {
+  background: #f1f5f9;
+  color: var(--color-text-main);
+  border: 1px solid #cbd5e1;
+  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  margin-bottom: 0.5rem;
+  transition: var(--transition-normal);
+}
+
+.btn-copy:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.payment-footer-note {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
