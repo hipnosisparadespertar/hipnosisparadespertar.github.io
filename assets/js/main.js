@@ -152,126 +152,79 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3.2 Modal de Pagos (PayPal & Banco Santander)
+  // 3.2 Modal de Pago Internacional (Lemon Squeezy - Stripe)
+  const LEMON_SQUEEZY_CHECKOUT_URL = 'https://hipnosisparadespertar.lemonsqueezy.com/checkout/buy/99336eab-afb1-4500-9313-6e63c4d47165';
+
   function openPaymentModal(serviceType = 'Sesión Online de Hipnosis') {
     const paymentHtml = `
       <div class="payment-modal-wrapper">
         <div class="payment-modal-header">
-          <span class="section-tag" style="margin-bottom: 0.5rem; display: inline-block;">Reserva de Sesión Online</span>
-          <h3 class="payment-modal-title">Métodos de Pago Disponibles</h3>
-          <p class="payment-modal-sub">Valor de la sesión: <strong>US$50.-</strong> (o equivalente en moneda local)</p>
+          <span class="section-tag" style="margin-bottom: 0.5rem; display: inline-block;">🌍 Pacientes en el Extranjero</span>
+          <h3 class="payment-modal-title">Pago Seguro con Tarjeta</h3>
+          <p class="payment-modal-sub">Checkout internacional procesado con tecnología Stripe vía Lemon Squeezy</p>
         </div>
 
-        <div class="payment-methods-grid">
-          <!-- Tarjeta 1: PayPal y Tarjetas Internacionales -->
-          <div class="payment-card">
+        <div class="payment-lemon-box">
+          <span class="badge-lemon">🔒 Checkout Directo y Seguro</span>
+          
+          <div class="payment-price-row">
             <div>
-              <span class="payment-card-badge badge-paypal">🌐 Tarjetas Internacionales / PayPal</span>
-              <h4 class="payment-card-title">Tarjeta de Débito, Crédito o PayPal</h4>
-              <div class="payment-card-amount">US$ 50.00</div>
-              <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 1.25rem; line-height: 1.55;">
-                <strong>¿No tienes cuenta de PayPal?</strong> No es necesario crearte una: en la pasarela puedes pagar directamente con tu tarjeta seleccionando la opción <em>"Pagar con tarjeta de débito o crédito"</em>.
-              </p>
+              <div class="payment-price-label">${serviceType}</div>
+              <small style="color: #64748b;">Videollamada 1 a 1 (1 hora y 15 minutos aprox.)</small>
             </div>
-            <div>
-              <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=carloslarraguibelf%40hotmail.com&item_name=${encodeURIComponent(serviceType)}&amount=50.00&currency_code=USD" 
-                 target="_blank" 
-                 rel="noopener" 
-                 class="btn btn-paypal" 
-                 style="width: 100%; text-align: center; justify-content: center; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; padding: 0.85rem 1rem;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .77-.655h7.625c3.705 0 6.137 1.776 5.677 5.15-.362 2.656-2.19 4.195-4.78 4.195h-2.52a.855.855 0 0 0-.845.72l-.995 6.207h-.001zm14.398-13.41c-.48 3.518-2.923 5.485-6.388 5.485h-2.22a.965.965 0 0 0-.954.814l-1.07 6.677a.641.641 0 0 1-.633.541H5.786a.428.428 0 0 1-.422-.494l.226-1.417.842-5.26.04-.216a.855.855 0 0 1 .845-.72h2.52c2.59 0 4.418-1.539 4.78-4.195.46-3.374-1.972-5.15-5.677-5.15H6.383a.78.78 0 0 0-.77.655L3.71 18.067a.428.428 0 0 0 .422.494h3.693l1.173-7.32a.965.965 0 0 1 .954-.814h2.22c3.465 0 5.908-1.967 6.388-5.485.426-3.13-1.636-4.942-5.06-4.942H6.94a.5.5 0 0 0-.494.422L6.15 2.11a.78.78 0 0 1 .77-.655h5.58c3.424 0 5.486 1.812 5.06 4.942l3.914 1.53z"/></svg>
-                Pagar US$50 con Tarjeta o PayPal
-              </a>
-            </div>
+            <div class="payment-price-tag">US$ 50.00</div>
           </div>
 
-          <!-- Tarjeta 2: Transferencia Bancaria (Chile) -->
-          <div class="payment-card">
-            <div>
-              <span class="payment-card-badge badge-chile">🇨🇱 Chile / Transferencia</span>
-              <h4 class="payment-card-title">Banco Santander Chile</h4>
-              <div class="payment-card-amount">Transferencia Bancaria</div>
-              <div class="payment-bank-details" id="bankDetailsBox">
-                <p><strong>Banco:</strong> Banco Santander Chile</p>
-                <p><strong>Tipo de Cuenta:</strong> Cuenta Corriente</p>
-                <p><strong>N° de Cuenta:</strong> 0047182-8</p>
-                <p><strong>Nombre:</strong> Carlos Larraguibel Fuentes</p>
-                <p><strong>RUT:</strong> 11.508.426-7</p>
-                <p><strong>Email:</strong> carloslarraguibelf@gmail.com</p>
-              </div>
-            </div>
-            <div>
-              <button type="button" class="btn btn-copy" id="btnCopyBank">
-                📋 Copiar Datos Bancarios
-              </button>
-              <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, he realizado la transferencia para mi sesión de hipnosis online. Adjunto mi comprobante:')}" 
-                 target="_blank" 
-                 rel="noopener" 
-                 class="btn btn-whatsapp" 
-                 style="width: 100%; text-align: center; justify-content: center; font-size: 0.9rem; padding: 0.75rem 1rem;">
-                <span>💬</span> Enviar Comprobante por WhatsApp
-              </a>
-            </div>
+          <ul class="payment-features-list">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Acepta tarjetas de crédito y débito internacionales (Visa, Mastercard, AMEX).</span>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Compatible con pagos rápidos mediante Apple Pay y Google Pay.</span>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Sin necesidad de crear cuentas:</strong> Pagas directo como invitado.</span>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Encriptación bancaria SSL de 256 bits y respaldo oficial de Stripe.</span>
+            </li>
+          </ul>
+
+          <a href="${LEMON_SQUEEZY_CHECKOUT_URL}" 
+             target="_blank" 
+             rel="noopener" 
+             class="btn btn-lemonsqueezy"
+             id="btnLemonSqueezyCheckout">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            🔒 Ir al Pago Seguro (US$50)
+          </a>
+
+          <div class="payment-chile-box">
+            <h5>🇨🇱 ¿Estás en Chile?</h5>
+            <p>
+              Para pacientes en Chile, la reserva y los datos de transferencia bancaria se entregan directamente por WhatsApp de forma personalizada.
+            </p>
+            <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, quisiera coordinar mi sesión online desde Chile y los datos para transferir.')}" 
+               target="_blank" 
+               rel="noopener" 
+               class="btn btn-whatsapp" 
+               style="display: inline-flex; justify-content: center; width: 100%; font-size: 0.9rem;">
+              <span>💬</span> Coordinar por WhatsApp (Chile)
+            </a>
           </div>
         </div>
 
         <div class="payment-footer-note">
-          <p>💬 ¿Prefieres coordinar fecha y hora antes de pagar? <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, quisiera consultar disponibilidad de horarios para mi sesión online.')}" target="_blank" rel="noopener" style="color: var(--color-accent); font-weight: 600; text-decoration: underline;">Escríbeme directamente por WhatsApp</a>.</p>
+          <p>💬 ¿Tienes dudas sobre horarios o la sesión antes de pagar? <a href="https://wa.me/56993438325?text=${encodeURIComponent('Hola Carlos, quisiera consultar disponibilidad antes de realizar el pago.')}" target="_blank" rel="noopener" style="color: var(--color-accent); font-weight: 600; text-decoration: underline;">Conversa directamente conmigo por WhatsApp</a>.</p>
         </div>
       </div>
     `;
 
     openModal(paymentHtml);
-
-    // Event listener para el botón de copiar datos bancarios
-    const copyBtn = document.getElementById('btnCopyBank');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        const textToCopy = `Banco: Banco Santander Chile\nTipo de Cuenta: Cuenta Corriente\nN° de Cuenta: 0047182-8\nNombre: Carlos Larraguibel Fuentes\nRUT: 11.508.426-7\nEmail: carloslarraguibelf@gmail.com`;
-
-        const copySuccess = () => {
-          const originalText = copyBtn.innerHTML;
-          copyBtn.innerHTML = '✅ ¡Datos Copiados al Portapapeles!';
-          copyBtn.style.background = '#dcfce7';
-          copyBtn.style.borderColor = '#86efac';
-          copyBtn.style.color = '#15803d';
-          copyBtn.style.fontWeight = '700';
-          setTimeout(() => {
-            copyBtn.innerHTML = originalText;
-            copyBtn.style.background = '';
-            copyBtn.style.borderColor = '';
-            copyBtn.style.color = '';
-            copyBtn.style.fontWeight = '';
-          }, 2500);
-        };
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(textToCopy).then(copySuccess).catch(() => {
-            fallbackCopy(textToCopy);
-            copySuccess();
-          });
-        } else {
-          fallbackCopy(textToCopy);
-          copySuccess();
-        }
-      });
-    }
-
-    function fallbackCopy(text) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.focus();
-      textarea.select();
-      try {
-        document.execCommand('copy');
-      } catch (err) {
-        console.error('Fallback copy failed', err);
-      }
-      document.body.removeChild(textarea);
-    }
   }
 
   // Activar botones que abren el modal de pagos
